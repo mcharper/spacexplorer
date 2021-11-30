@@ -1,9 +1,15 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import App from "./App";
 
-test('renders learn react link', () => {
+test("renders the app title", () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const titleElement = screen.getByText(/Spacexplorer/i);
+  expect(titleElement).toBeInTheDocument();
+});
+
+test("renders the launch lister on the home page", () => {
+  render(<App />);
+  const launchListTitleElement = screen.getByText(/Launch List/i);
+  expect(launchListTitleElement).toBeInTheDocument();
 });
