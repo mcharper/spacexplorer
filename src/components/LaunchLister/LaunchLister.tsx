@@ -1,12 +1,24 @@
-import React from "react";
+import { AgGridReact, AgGridColumn } from "ag-grid-react";
+import { LaunchListerProps } from "./LaunchListerProps";
+
+import "ag-grid-community/dist/styles/ag-grid.css";
+import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 import { useLaunchListerStyles } from "./hooks/useLaunchListerStyles";
 
-export const LaunchLister = (): JSX.Element => {
+export const LaunchLister = (props: LaunchListerProps): JSX.Element => {
   const classes = useLaunchListerStyles();
 
   return (
     <div>
       <h2>Launch List</h2>
+
+      <div className={classes.launchList + " ag-theme-alpine"}>
+        <AgGridReact rowData={props.launchList}>
+          <AgGridColumn field="rocketName" sortable={true}></AgGridColumn>
+          <AgGridColumn field="launchDateUtc" sortable={true}></AgGridColumn>
+          <AgGridColumn field="nationality"></AgGridColumn>
+        </AgGridReact>
+      </div>
     </div>
   );
 };
