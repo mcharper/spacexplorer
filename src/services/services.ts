@@ -1,27 +1,25 @@
+import axios from "axios";
+import { Mappers } from "../mappers/mappers";
 import { LaunchSummary } from "../models/LaunchSummary";
 
 export class Services {
-  private static launchList: LaunchSummary[] = [
-    {
-      rocketName: "X",
-      launchDateUtc: "2017-06-23T19:10:000Z",
-      nationality: "UK",
-    },
-    {
-      rocketName: "Y",
-      launchDateUtc: "2017-06-23T19:10:000Z",
-      nationality: "USA",
-    },
-    {
-      rocketName: "Z",
-      launchDateUtc: "2017-06-23T19:10:000Z",
-      nationality: "CHINA",
-    },
-  ];
-
   public static async getRecentLaunches(
     launchCount: number
   ): Promise<LaunchSummary[]> {
-    return Promise.resolve(Services.launchList);
+    // Using "any" here because I don't want to define the whole
+    // result shape from the API at this point, I'm just going
+    // to map the cherry-picked data I want for the app
+    const launchListResponse = await axios.get<Promise<any[]>>(
+      `https://api.spacexdata.com/v3/launches/past?limit=${launchCount}`
+    );
+
+    if (launchListResponse.status === 200) {
+      const launchList: LaunchSummary[] = (await launchListResponse.data).map(
+        Mappers.mapLaunchSummaryData
+      );
+      return launchList;
+    } else {
+      throw new Error(`Could not retrieve launch list`);
+    }
   }
 }

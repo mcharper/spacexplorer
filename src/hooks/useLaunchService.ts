@@ -4,12 +4,12 @@ import { LaunchServiceResult } from "../models/LaunchServiceResult";
 import { LaunchSummary } from "../models/LaunchSummary";
 import { Services } from "../services/services";
 
-export const useLaunchService = (): LaunchServiceResult => {
+export const useLaunchService = (launchCount: number): LaunchServiceResult => {
   const [launchList, setLaunchList] = useState<LaunchSummary[]>([]);
 
   useEffect(() => {
-    getRecentLaunches(50);
-  });
+    getRecentLaunches(launchCount);
+  }, []);
 
   const getRecentLaunches = async (launchCount: number) => {
     const recentLaunches = await Services.getRecentLaunches(launchCount);

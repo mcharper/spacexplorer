@@ -7,19 +7,19 @@ let launchList: LaunchSummary[];
 beforeAll(() => {
   launchList = [
     {
-      rocketName: "X",
+      missionName: "X",
       launchDateUtc: "2017-06-23T19:10:000Z",
-      nationality: "UK",
+      details: "Test details for X",
     },
     {
-      rocketName: "Y",
-      launchDateUtc: "2017-06-23T19:10:000Z",
-      nationality: "USA",
+      missionName: "Y",
+      launchDateUtc: "2017-06-24T19:10:000Z",
+      details: "Test details for Y",
     },
     {
-      rocketName: "Z",
-      launchDateUtc: "2017-06-23T19:10:000Z",
-      nationality: "CHINA",
+      missionName: "Z",
+      launchDateUtc: "2017-06-25T19:10:000Z",
+      details: "Test details for Z",
     },
   ];
 });
@@ -41,7 +41,7 @@ test("renders right text for each column header", () => {
   render(<LaunchLister launchList={launchList} />);
 
   const columnHeaders = screen.getAllByRole("columnheader");
-  const columnHeaderText = within(columnHeaders[0]).getByText(/Rocket Name/);
+  const columnHeaderText = within(columnHeaders[0]).getByText(/Mission Name/);
   expect(columnHeaderText).not.toBeNull();
   // TODO: Check the other columns
 });

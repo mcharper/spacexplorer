@@ -14,9 +14,9 @@ export const LaunchLister = (props: LaunchListerProps): JSX.Element => {
 
       <div className={classes.launchList + " ag-theme-alpine"}>
         <AgGridReact rowData={props.launchList}>
-          <AgGridColumn field="rocketName" sortable={true}></AgGridColumn>
+          <AgGridColumn field="missionName" sortable={true}></AgGridColumn>
           <AgGridColumn field="launchDateUtc" sortable={true}></AgGridColumn>
-          <AgGridColumn field="nationality"></AgGridColumn>
+          <AgGridColumn field="details"></AgGridColumn>
         </AgGridReact>
       </div>
     </div>

@@ -1,5 +1,5 @@
 export interface LaunchSummary {
-  rocketName: string;
+  missionName: string;
   launchDateUtc: string;
-  nationality: string;
+  details: string;
 }
