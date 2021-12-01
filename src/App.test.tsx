@@ -4,7 +4,7 @@ import App from "./App";
 
 test("renders the app title", () => {
   render(<App />);
-  const titleElement = screen.getByText(/Spacexplorer/i);
+  const titleElement = screen.getByText(/Space.*?plorer/i);
   expect(titleElement).toBeInTheDocument();
 });
 
