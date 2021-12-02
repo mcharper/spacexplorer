@@ -17,7 +17,7 @@ export const LaunchDetailViewer = (
 
   return (
     <div className={classes.detailView}>
-      <h2>Launch Details</h2>
+      <h2>Rocket Details</h2>
 
       {props.rocketDetails?.id ? (
         <>
