@@ -1,6 +1,25 @@
-# Getting Started with Create React App
+# SpaceXplorer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![image](https://user-images.githubusercontent.com/7680389/144451182-5d281f3d-7f9d-42ce-946e-4a6c6f3ffa29.png)
+
+This mini-project is something I created for a technical test recently.
+
+The brief was to build an application using the free open SpaceX API https://docs.spacexdata.com to:
+- list the most recent 50 launches
+- for each launch show the launch name, date and details (I'm interpreting launch name to be the name of the mission)
+- sort by launch name and date
+- search by launch name (I'm interpreting this to mean search using a filter within the results returned in the original 50)
+- view the details of the rocket used
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and uses:
+- React
+- TypeScript
+- Jest
+- React Testing Library
+- Material-UI
+- AG Grid
+
+The API requires no authentication and is open (from a CORS point of view).
 
 ## Available Scripts
 
@@ -29,18 +48,3 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
