@@ -49,9 +49,10 @@ test("renders right text for each column header", () => {
   );
 
   const columnHeaders = screen.getAllByRole("columnheader");
-  const columnHeaderText = within(columnHeaders[0]).getByText(/Mission Name/);
-  expect(columnHeaderText).not.toBeNull();
-  // TODO: Check the other columns
+
+  expect(within(columnHeaders[0]).getByText(/Mission Name/)).not.toBeNull();
+  expect(within(columnHeaders[1]).getByText(/Launch Date Utc/)).not.toBeNull();
+  expect(within(columnHeaders[2]).getByText(/Rocket Id/)).not.toBeNull();
 });
 
 test("renders grid cells to display the data", () => {
@@ -68,17 +69,32 @@ test("renders grid cells to display the data", () => {
   expect(gridCellCount).toHaveLength(expectedGridCellCount);
 });
 
-// TODO: This is a false positive - fix this
+// TODO: This may be a false positive - fix this
 test("clicking on the mission name column header once sorts the data in ascending alphabetical order", () => {
   render(
     <LaunchLister launchList={launchList} setCurrentRocketId={jest.fn()} />
   );
 
-  const x = screen.getByText("Mission Name");
-  userEvent.click(x);
+  const missionNameHeader = screen.getByText("Mission Name");
+  userEvent.click(missionNameHeader);
 
   const valuesInColumn = screen.queryAllByText(/Mission-/);
-  expect(within(valuesInColumn[0]).getByText(/Mission-X/)).toBeInTheDocument();
-  expect(within(valuesInColumn[1]).getByText(/Mission-Y/)).toBeInTheDocument();
-  expect(within(valuesInColumn[2]).getByText(/Mission-Z/)).toBeInTheDocument();
+  expect(within(valuesInColumn[0]).queryAllByText(/Mission-X/)).toHaveLength(1);
+  expect(within(valuesInColumn[1]).queryAllByText(/Mission-Y/)).toHaveLength(1);
+  expect(within(valuesInColumn[2]).queryAllByText(/Mission-Z/)).toHaveLength(1);
+});
+
+// TODO: This may be a false positive - fix this
+test("tabbing into the mission name column header and hitting enter once sorts the data in ascending alphabetical order", () => {
+  render(
+    <LaunchLister launchList={launchList} setCurrentRocketId={jest.fn()} />
+  );
+
+  const missionNameHeader = screen.getByText("Mission Name");
+  userEvent.type(missionNameHeader, "{enter}");
+
+  const valuesInColumn = screen.queryAllByText(/Mission-/);
+  expect(within(valuesInColumn[0]).queryAllByText(/Mission-X/)).toHaveLength(1);
+  expect(within(valuesInColumn[1]).queryAllByText(/Mission-Y/)).toHaveLength(1);
+  expect(within(valuesInColumn[2]).queryAllByText(/Mission-Z/)).toHaveLength(1);
 });

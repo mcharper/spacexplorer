@@ -28,6 +28,7 @@ function App() {
               launchList={launchHookResult.launchList}
               setCurrentRocketId={launchHookResult.setCurrentRocketId}
             />
+
             {launchHookResult.rocketDetails && (
               <LaunchDetailViewer
                 rocketDetails={launchHookResult.rocketDetails}
