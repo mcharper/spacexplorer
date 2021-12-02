@@ -28,6 +28,13 @@ test("renders an image if there is one", () => {
   expect(image).toBeInTheDocument();
 });
 
+test("renders an alt tag for the image if there is one", () => {
+  render(<LaunchDetailViewer rocketDetails={rocketDetails} />);
+
+  const altTag = screen.getByAltText(/Falcon/);
+  expect(altTag).toBeInTheDocument();
+});
+
 test("renders a section labelled Vital Statistics", () => {
   render(<LaunchDetailViewer rocketDetails={rocketDetails} />);
 

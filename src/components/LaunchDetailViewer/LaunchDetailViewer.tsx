@@ -1,5 +1,13 @@
-import { LaunchDetailViewerProps } from "./LaunchDetailViewerProps";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowsAltV,
+  faCircle,
+  faCoffee,
+  faDollarSign,
+  faFlag,
+} from "@fortawesome/free-solid-svg-icons";
 
+import { LaunchDetailViewerProps } from "./LaunchDetailViewerProps";
 import { useLaunchDetailViewerStyles } from "./hooks/useLaunchDetailViewerStyles";
 
 export const LaunchDetailViewer = (
@@ -12,11 +20,13 @@ export const LaunchDetailViewer = (
       <h2>Launch Details</h2>
 
       <div className={classes.imageArea}>
-        {props.rocketDetails.images?.length > 0 && (
+        {props.rocketDetails.images?.length > 0 ? (
           <img
             src={props.rocketDetails.images[0]}
             alt={props.rocketDetails.name}
           />
+        ) : (
+          <img src="logo192.png" />
         )}
       </div>
 
@@ -24,11 +34,26 @@ export const LaunchDetailViewer = (
         <h3>Vital Statistics</h3>
 
         <ul>
-          <li>Type: {props.rocketDetails.type}</li>
-          <li>Diameter: {props.rocketDetails.diameter}m</li>
-          <li>Height: {props.rocketDetails.height}m</li>
-          <li>Country: {props.rocketDetails.country}</li>
-          <li>Cost per Launch: USD {props.rocketDetails.costPerLaunch}</li>
+          <li>
+            <FontAwesomeIcon icon={faArrowsAltV} />
+            Type: {props.rocketDetails.type}
+          </li>
+          <li>
+            <FontAwesomeIcon icon={faCircle} />
+            Diameter: {props.rocketDetails.diameter}m
+          </li>
+          <li>
+            <FontAwesomeIcon icon={faArrowsAltV} /> Height:{" "}
+            {props.rocketDetails.height}m
+          </li>
+          <li>
+            <FontAwesomeIcon icon={faFlag} />
+            Country: {props.rocketDetails.country}
+          </li>
+          <li>
+            <FontAwesomeIcon icon={faDollarSign} />
+            Cost per Launch: USD {props.rocketDetails.costPerLaunch}
+          </li>
         </ul>
       </div>
 

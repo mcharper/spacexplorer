@@ -13,8 +13,8 @@ export class Mappers {
   public static mapRocketDetails = (rocketDetails: any): RocketDetails => {
     return {
       id: rocketDetails.rocket_id,
-      name: rocketDetails.name,
-      type: rocketDetails.type,
+      name: rocketDetails.rocket_name,
+      type: rocketDetails.rocket_type,
       description: rocketDetails.description,
       images: rocketDetails.flickr_images,
       stages: rocketDetails.stages,
