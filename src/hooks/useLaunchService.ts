@@ -20,6 +20,7 @@ export const useLaunchService = (launchCount: number): LaunchServiceResult => {
   }, [currentRocketId]);
 
   const getRecentLaunches = async (launchCount: number) => {
+    setIsLoading(true);
     const recentLaunches = await Services.getRecentLaunches(launchCount);
     setLaunchList(recentLaunches);
     setIsLoading(false);
