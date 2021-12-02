@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Mappers } from "../mappers/mappers";
 import { LaunchSummary } from "../models/LaunchSummary";
+import { RocketDetails } from "../models/RocketDetails";
 
 export class Services {
   public static async getRecentLaunches(
@@ -20,6 +21,23 @@ export class Services {
       return launchList;
     } else {
       throw new Error(`Could not retrieve launch list`);
+    }
+  }
+
+  public static async getRocketDetails(
+    rocketId: string
+  ): Promise<RocketDetails> {
+    const rocketDetailsResponse = await axios.get<Promise<any>>(
+      `https://api.spacexdata.com/v3/rockets/${rocketId}`
+    );
+
+    if (rocketDetailsResponse.status === 200) {
+      const rocketDetails: RocketDetails = Mappers.mapRocketDetails(
+        await rocketDetailsResponse.data
+      );
+      return rocketDetails;
+    } else {
+      throw new Error(`Could not retrieve rocket details`);
     }
   }
 }

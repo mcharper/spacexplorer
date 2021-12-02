@@ -1,12 +1,12 @@
-import React from "react";
-import "./App.css";
 import { LaunchLister } from "./components/LaunchLister/LaunchLister";
+import { LaunchDetailViewer } from "./components/LaunchDetailViewer/LaunchDetailViewer";
 import { useLaunchService } from "./hooks/useLaunchService";
-import { LaunchSummary } from "./models/LaunchSummary";
+
+import "./App.css";
+
+const LAUNCH_COUNT = 50;
 
 function App() {
-  const LAUNCH_COUNT = 50;
-
   const launchHookResult = useLaunchService(LAUNCH_COUNT);
 
   return (
@@ -19,7 +19,23 @@ function App() {
         </h1>
       </header>
 
-      <LaunchLister launchList={launchHookResult.launchList} />
+      <div id="container">
+        {launchHookResult.isLoading ? (
+          "Loading ..."
+        ) : (
+          <>
+            <LaunchLister
+              launchList={launchHookResult.launchList}
+              setCurrentRocketId={launchHookResult.setCurrentRocketId}
+            />
+            {launchHookResult.rocketDetails && (
+              <LaunchDetailViewer
+                rocketDetails={launchHookResult.rocketDetails}
+              />
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 }
