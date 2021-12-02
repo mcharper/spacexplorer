@@ -37,8 +37,8 @@ describe("The mappers", () => {
   test("mapRocketDetails maps recognised incoming properties to their counterparts", () => {
     const mappedObject = Mappers.mapRocketDetails({
       rocket_id: "falcon1",
-      name: "Falcon",
-      type: "X",
+      rocket_name: "Falcon",
+      rocket_type: "X",
       description: "A rocket",
       flickr_images: ["http://www.test.com/img1"],
       stages: 2,
@@ -67,7 +67,7 @@ describe("The mappers", () => {
   test("mapRocketDetails is not fazed by incoming properties with no mapping", () => {
     const mappedObject = Mappers.mapRocketDetails({
       rocket_id: "falcon1",
-      name: "Falcon",
+      rocket_name: "Falcon",
       height: {
         meters: 70,
       },
