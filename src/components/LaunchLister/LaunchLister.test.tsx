@@ -22,7 +22,7 @@ beforeAll(() => {
       missionName: "Mission-Z",
       launchDateUtc: "2017-06-25T19:10:000Z",
       rocketId: "falcon1",
-    },
+    }
   ];
 });
 
@@ -69,8 +69,27 @@ test("renders grid cells to display the data", () => {
   expect(gridCellCount).toHaveLength(expectedGridCellCount);
 });
 
-// TODO: This may be a false positive - fix this
-test("clicking on the mission name column header once sorts the data in ascending alphabetical order", () => {
+test("(for illustration purposes) the data is shown in the original order and each row is assigned an ascending index", () => {
+  render(
+    <LaunchLister launchList={launchList} setCurrentRocketId={jest.fn()} />
+  );
+
+  const valuesInColumn = screen.queryAllByText(/Mission-/);
+
+  expect(valuesInColumn[0].textContent).toBe("Mission-X"); 
+  expect(valuesInColumn[1].textContent).toBe("Mission-Y");
+  expect(valuesInColumn[2].textContent).toBe("Mission-Z");
+
+  expect(valuesInColumn[0].parentNode.getAttribute("row-index")).toBe("0");
+  expect(valuesInColumn[1].parentNode.getAttribute("row-index")).toBe("1");
+  expect(valuesInColumn[2].parentNode.getAttribute("row-index")).toBe("2");
+
+});
+
+test("clicking once on the mission name column header sorts the data in ascending alphabetical order", () => {
+  // agGrid doesn't move the elements in the DOM when sorting
+  // So they are in the order shown in the mock
+  // It just changes the row indices
   render(
     <LaunchLister launchList={launchList} setCurrentRocketId={jest.fn()} />
   );
@@ -79,22 +98,59 @@ test("clicking on the mission name column header once sorts the data in ascendin
   userEvent.click(missionNameHeader);
 
   const valuesInColumn = screen.queryAllByText(/Mission-/);
-  expect(within(valuesInColumn[0]).queryAllByText(/Mission-X/)).toHaveLength(1);
-  expect(within(valuesInColumn[1]).queryAllByText(/Mission-Y/)).toHaveLength(1);
-  expect(within(valuesInColumn[2]).queryAllByText(/Mission-Z/)).toHaveLength(1);
+
+  // (For illustration purposes)agGrid doesn't actually reorder the DOM elements
+  expect(valuesInColumn[0].textContent).toBe("Mission-X");
+  expect(valuesInColumn[1].textContent).toBe("Mission-Y");
+  expect(valuesInColumn[2].textContent).toBe("Mission-Z");
+  
+  // It just moves the row indices around
+  expect(valuesInColumn[0].parentNode.getAttribute("row-index")).toBe("0");
+  expect(valuesInColumn[1].parentNode.getAttribute("row-index")).toBe("1");
+  expect(valuesInColumn[2].parentNode.getAttribute("row-index")).toBe("2");
 });
 
-// TODO: This may be a false positive - fix this
-test("tabbing into the mission name column header and hitting enter once sorts the data in ascending alphabetical order", () => {
+test("clicking twice on the mission name column header sorts the data in descending alphabetical order", () => {
   render(
     <LaunchLister launchList={launchList} setCurrentRocketId={jest.fn()} />
   );
 
   const missionNameHeader = screen.getByText("Mission Name");
-  userEvent.type(missionNameHeader, "{enter}");
+  userEvent.click(missionNameHeader);
+  userEvent.click(missionNameHeader);
 
   const valuesInColumn = screen.queryAllByText(/Mission-/);
-  expect(within(valuesInColumn[0]).queryAllByText(/Mission-X/)).toHaveLength(1);
-  expect(within(valuesInColumn[1]).queryAllByText(/Mission-Y/)).toHaveLength(1);
-  expect(within(valuesInColumn[2]).queryAllByText(/Mission-Z/)).toHaveLength(1);
+
+  // (For illustration purposes)agGrid doesn't actually reorder the DOM elements
+  expect(valuesInColumn[0].textContent).toBe("Mission-X");
+  expect(valuesInColumn[1].textContent).toBe("Mission-Y");
+  expect(valuesInColumn[2].textContent).toBe("Mission-Z");
+  
+  // It just moves the row indices around
+  expect(valuesInColumn[0].parentNode.getAttribute("row-index")).toBe("2");
+  expect(valuesInColumn[1].parentNode.getAttribute("row-index")).toBe("1");
+  expect(valuesInColumn[2].parentNode.getAttribute("row-index")).toBe("0");
+});
+
+test("clicking three times on the mission name column header restores the original sort order", () => {
+  render(
+    <LaunchLister launchList={launchList} setCurrentRocketId={jest.fn()} />
+  );
+
+  const missionNameHeader = screen.getByText("Mission Name");
+  userEvent.click(missionNameHeader);
+  userEvent.click(missionNameHeader);
+  userEvent.click(missionNameHeader);
+
+  const valuesInColumn = screen.queryAllByText(/Mission-/);
+
+  // (For illustration purposes)agGrid doesn't actually reorder the DOM elements
+  expect(valuesInColumn[0].textContent).toBe("Mission-X");
+  expect(valuesInColumn[1].textContent).toBe("Mission-Y");
+  expect(valuesInColumn[2].textContent).toBe("Mission-Z");
+  
+  // It just moves the row indices around
+  expect(valuesInColumn[0].parentNode.getAttribute("row-index")).toBe("0");
+  expect(valuesInColumn[1].parentNode.getAttribute("row-index")).toBe("1");
+  expect(valuesInColumn[2].parentNode.getAttribute("row-index")).toBe("2");
 });
