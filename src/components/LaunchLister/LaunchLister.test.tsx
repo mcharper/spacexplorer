@@ -99,7 +99,7 @@ test("clicking once on the mission name column header sorts the data in ascendin
 
   const valuesInColumn = screen.queryAllByText(/Mission-/);
 
-  // (For illustration purposes)agGrid doesn't actually reorder the DOM elements
+  // (For illustration purposes) agGrid doesn't actually reorder the DOM elements
   expect(valuesInColumn[0].textContent).toBe("Mission-X");
   expect(valuesInColumn[1].textContent).toBe("Mission-Y");
   expect(valuesInColumn[2].textContent).toBe("Mission-Z");
@@ -121,7 +121,7 @@ test("clicking twice on the mission name column header sorts the data in descend
 
   const valuesInColumn = screen.queryAllByText(/Mission-/);
 
-  // (For illustration purposes)agGrid doesn't actually reorder the DOM elements
+  // (For illustration purposes) agGrid doesn't actually reorder the DOM elements
   expect(valuesInColumn[0].textContent).toBe("Mission-X");
   expect(valuesInColumn[1].textContent).toBe("Mission-Y");
   expect(valuesInColumn[2].textContent).toBe("Mission-Z");
@@ -144,7 +144,7 @@ test("clicking three times on the mission name column header restores the origin
 
   const valuesInColumn = screen.queryAllByText(/Mission-/);
 
-  // (For illustration purposes)agGrid doesn't actually reorder the DOM elements
+  // (For illustration purposes) agGrid doesn't actually reorder the DOM elements
   expect(valuesInColumn[0].textContent).toBe("Mission-X");
   expect(valuesInColumn[1].textContent).toBe("Mission-Y");
   expect(valuesInColumn[2].textContent).toBe("Mission-Z");
