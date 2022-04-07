@@ -35,6 +35,15 @@ test("renders a grid to display the list", () => {
   expect(grid).toBeInTheDocument();
 });
 
+test("renders a grid that matches the expected snapshot", () => {
+  render(
+    <LaunchLister launchList={launchList} setCurrentRocketId={jest.fn()} />
+  );
+
+  const grid = screen.getByRole("grid");
+  expect(grid).toMatchSnapshot();
+});
+
 test("renders a header for each column represented in the data", () => {
   render(
     <LaunchLister launchList={launchList} setCurrentRocketId={jest.fn()} />

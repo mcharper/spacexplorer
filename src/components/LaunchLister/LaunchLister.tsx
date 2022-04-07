@@ -14,7 +14,7 @@ export const LaunchLister = (props: LaunchListerProps): JSX.Element => {
       <h2>Launch List</h2>
 
       <div className={classes.launchList + " ag-theme-alpine"}>
-        <AgGridReact rowData={props.launchList}>
+        <AgGridReact rowData={props.launchList} suppressColumnVirtualisation={process.env.NODE_ENV === "test"}>
           <AgGridColumn
             field="missionName"
             sortable={true}
